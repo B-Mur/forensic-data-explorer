@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 from PIL import Image
+import datetime
 
 
 def get_date_taken(path):
