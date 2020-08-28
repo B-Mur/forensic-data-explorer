@@ -61,3 +61,16 @@ def plot_rgb_thermal(thermal, rgb, dynamic=None):
   fig.update_layout(coloraxis=dict(colorscale='Bluered_r'), showlegend=False)
 
   return fig
+
+
+def plot_logger_fig(loggerFile, thermal_image=None):
+  ''' This will return a plot of the logger info with the center value of a thermal image (if provided '''
+  logger_df = pd.read_csv(os.path.join(imgDir, loggerFile[0]))
+  vals = [datetime.datetime(row.year, row.month, row.day, row.hour, row.minute, row.second) for index, row in logger_df.iterrows()]
+  logger_df['FormatDate'] = vals
+  logger_fig = go.Figure()
+  logger_fig.add_trace(go.Scatter(x=logger_df['FormatDate'], y=logger_df['Surface abdomen'], name='Surface Abdomen'))
+  logger_fig.add_trace(go.Scatter(x=logger_df['FormatDate'], y=logger_df['Surface thigh'], name='Surface thigh'))
+  if not thermal_image is None:
+    logger_fig.add_trace(go.Scatter(x=[date], y=[thermal[90, 120]], name='Current Sample'))
+  return logger_fig
