@@ -20,6 +20,7 @@ def get_date_taken(path):
 def build_duo_image_links(img_dir):
   '''Extract DateTimes for each image in directory'''
   imgs = os.listdir(img_dir)    ## List all images in directory
+  img = [img for img in imgs if img.endswith('.jpg')]
   df = pd.DataFrame(imgs)       ## Build dataframe with names of all images
 
   # Loop over all images to get date and time.
