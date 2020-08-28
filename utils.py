@@ -63,7 +63,7 @@ def plot_rgb_thermal(thermal, rgb, dynamic=None):
   return fig
 
 
-def plot_logger_fig(loggerFile, thermal_image=None):
+def plot_logger_fig(imgDir, loggerFile, thermal_image=None):
   ''' This will return a plot of the logger info with the center value of a thermal image (if provided '''
   logger_df = pd.read_csv(os.path.join(imgDir, loggerFile[0]))
   vals = [datetime.datetime(row.year, row.month, row.day, row.hour, row.minute, row.second) for index, row in logger_df.iterrows()]
