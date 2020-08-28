@@ -55,7 +55,7 @@ def plot_rgb_thermal(thermal, rgb, dynamic=None):
   if not dynamic is None: 
     fig.add_trace(go.Heatmap(z=thermal,  zmin=dynamic[0], zmax=dynamic[1], ), 1, 2)
   else:
-      fig.add_trace(go.Heatmap(z=thermal), 1, 2)
+    fig.add_trace(go.Heatmap(z=thermal), 1, 2)
 
   fig.update_layout(coloraxis=dict(colorscale='Bluered_r'), showlegend=False)
 
