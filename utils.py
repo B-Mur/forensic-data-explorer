@@ -48,11 +48,14 @@ def get_flir_image(imgPath):
   
   return img, modality
 
-def plot_rgb_thermal(thermal, rgb):
+def plot_rgb_thermal(thermal, rgb, dynamic=None):
   fig = make_subplots(rows=1, cols=2)
 
   fig.add_trace(go.Image(z=rgb), 1, 1)
-  fig.add_trace(go.Heatmap(z=thermal), 1, 2)
+  if not dynamic is None: 
+    fig.add_trace(go.Heatmap(z=thermal,  zmin=dynamic[0], zmax=dynamic[1], ), 1, 2)
+  else:
+      fig.add_trace(go.Heatmap(z=thermal), 1, 2)
 
   fig.update_layout(coloraxis=dict(colorscale='Bluered_r'), showlegend=False)
 
