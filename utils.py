@@ -85,7 +85,7 @@ def plot_logger_fig(imgDir, loggerFile, thermal_image=None, weather=None):
     weather['Date_Time'] = pd.to_datetime(weather['Date_Time'])
     weather.columns
     start_date, end_date = logger_df['FormatDate'].head(1), logger_df['FormatDate'].tail(1)
-    weather.loc[(weather['Date_Time'] > start_date.iloc[0]) & (weather['Date_Time'] < end_date.iloc[0])]
+    weather = weather.loc[(weather['Date_Time'] > start_date.iloc[0]) & (weather['Date_Time'] < end_date.iloc[0])]
     logger_fig.add_trace(go.Scatter(x=weather['Date_Time'], y=weather['Air Temp'], name='Air Temperature'))
     logger_fig.add_trace(go.Scatter(x=weather['Date_Time'], y=weather['relative_humidity_set_1'], name='Relative Humidity'))
     logger_fig.add_trace(go.Scatter(x=weather['Date_Time'], y=weather['soil_moisture_set_1'], name='Soil Moisture'))
