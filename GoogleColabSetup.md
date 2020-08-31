@@ -14,6 +14,10 @@ In order to run the GoogleColab notebooks, please follow this set of instruction
 <img src="images/connect_folder.png" height="350" />
 
 - Connect GoogleDrive to colab
+<img src="images/connect_drive.png" height="350" />
+
 - Follow instructions for connecting
+<img src="images/run_cell.png" height="350" />
+
 - Now, follow the notebook starting from the top. 
 
