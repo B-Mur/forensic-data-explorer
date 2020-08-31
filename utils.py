@@ -76,7 +76,7 @@ def plot_logger_fig(imgDir, loggerFile, thermal_image=None, weather=None):
     logger_fig.add_trace(go.Scatter(x=[date], y=[thermal[90, 120]], name='Current Sample'))
 
   if not weather is None:
-    logger_df = pd.read_csv(os.path.join(loggerDir, loggerFile[0]))
+    logger_df = pd.read_csv(os.path.join(imgDir, loggerFile[0]))
     vals = [datetime.datetime(row.year, row.month, row.day, row.hour, row.minute, row.second) for index, row in logger_df.iterrows()]
     logger_df['FormatDate'] = vals
     logger_df['FormatDate'].tail(1)
