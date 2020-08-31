@@ -64,7 +64,7 @@ def plot_rgb_thermal(thermal, rgb, dynamic=None):
   return fig
 
 
-def plot_logger_fig(imgDir, loggerFile, thermal_image=None):
+def plot_logger_fig(imgDir, loggerFile, thermal_image=None, weather=None):
   ''' This will return a plot of the logger info with the center value of a thermal image (if provided '''
   logger_df = pd.read_csv(os.path.join(imgDir, loggerFile[0]))
   vals = [datetime.datetime(row.year, row.month, row.day, row.hour, row.minute, row.second) for index, row in logger_df.iterrows()]
@@ -74,4 +74,21 @@ def plot_logger_fig(imgDir, loggerFile, thermal_image=None):
   logger_fig.add_trace(go.Scatter(x=logger_df['FormatDate'], y=logger_df['Surface thigh'], name='Surface thigh'))
   if not thermal_image is None:
     logger_fig.add_trace(go.Scatter(x=[date], y=[thermal[90, 120]], name='Current Sample'))
+
+  if not weather is None:
+    logger_df = pd.read_csv(os.path.join(loggerDir, loggerFile[0]))
+    vals = [datetime.datetime(row.year, row.month, row.day, row.hour, row.minute, row.second) for index, row in logger_df.iterrows()]
+    logger_df['FormatDate'] = vals
+    logger_df['FormatDate'].tail(1)
+    weather = pd.read_csv('/content/drive/My Drive/NIJ/Notebooks/Data/NIJ-DATA/WEATHER/030120_071620.csv', header=6)
+    weather.dropna(inplace=True)
+    weather['Date_Time'] = pd.to_datetime(weather['Date_Time'])
+    weather.columns
+    start_date, end_date = logger_df['FormatDate'].head(1), logger_df['FormatDate'].tail(1)
+    weather.loc[(weather['Date_Time'] > start_date.iloc[0]) & (weather['Date_Time'] < end_date.iloc[0])]
+    logger_fig.add_trace(go.Scatter(x=weather['Date_Time'], y=weather['Air Temp'], name='Air Temperature'))
+    logger_fig.add_trace(go.Scatter(x=weather['Date_Time'], y=weather['relative_humidity_set_1'], name='Relative Humidity'))
+    logger_fig.add_trace(go.Scatter(x=weather['Date_Time'], y=weather['soil_moisture_set_1'], name='Soil Moisture'))
+    logger_fig.add_trace(go.Scatter(x=weather['Date_Time'], y=weather['solar_radiation_set_1'], name='Soil Radiation'))
+    logger_fig.add_trace(go.Scatter(x=weather['Date_Time'], y=weather['soil temp '], name='Soil Temperature'))
   return logger_fig
