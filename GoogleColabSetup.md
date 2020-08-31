@@ -8,10 +8,10 @@ In order to run the GoogleColab notebooks, please follow this set of instruction
 - Navigate to the ColabNotebooks folder
 - Select any notebook
 - Click the blue "Open in Colab" button
-<img src="images/colab_button.png" height="200" />
+<img src="images/colab_button.png" height="350" />
 
 - On the left side of the browser, click the folder icon. 
-<img src="images/connect_folder.png" height="200" />
+<img src="images/connect_folder.png" height="350" />
 
 - Connect GoogleDrive to colab
 - Follow instructions for connecting
