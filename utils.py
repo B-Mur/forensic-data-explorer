@@ -64,7 +64,7 @@ def plot_rgb_thermal(thermal, rgb, dynamic=None):
   return fig
 
 
-def plot_logger_fig(imgDir, loggerFile, thermal_image=None, weather=None):
+def plot_logger_fig(imgDir, loggerFile, thermal_image=None, weather=None, weatherPath=None):
   ''' This will return a plot of the logger info with the center value of a thermal image (if provided '''
   logger_df = pd.read_csv(os.path.join(imgDir, loggerFile[0]))
   vals = [datetime.datetime(row.year, row.month, row.day, row.hour, row.minute, row.second) for index, row in logger_df.iterrows()]
@@ -80,7 +80,7 @@ def plot_logger_fig(imgDir, loggerFile, thermal_image=None, weather=None):
     vals = [datetime.datetime(row.year, row.month, row.day, row.hour, row.minute, row.second) for index, row in logger_df.iterrows()]
     logger_df['FormatDate'] = vals
     logger_df['FormatDate'].tail(1)
-    weather = pd.read_csv('/content/drive/My Drive/NIJ/Notebooks/Data/NIJ-DATA/WEATHER/030120_071620.csv', header=6)
+    weather = pd.read_csv(weatherPath, header=6)
     weather.dropna(inplace=True)
     weather['Date_Time'] = pd.to_datetime(weather['Date_Time'])
     weather.columns
